@@ -10,6 +10,18 @@ Esse script é responsável por encontrar repositórios que morreram e reviveram
 
 Atualmente ele está configurado apenas para testes, pegando poucos repositórios, mas já é possível testar (`python pipeline-unificado-v1.py`) e verificar que o arquivo que ele gera realmente [...]
 
+## Pipeline Pilar 3 (qualidade de código)
+
+O script `pipeline/pipeline-pilar3.py` roda a coleta de snapshots pré-morte e pós-revive para cada repositório identificado na planilha de entrada e executa as análises do Sonar via `pysonar`. Exemplo de uso:
+
+```bash
+python pipeline/pipeline-pilar3.py validacao/repositorios_morte_ressurreicao_2022.xlsx \
+	--github-token "<TOKEN_GITHUB>" \
+	--sonar-token "<TOKEN_SONAR>"
+```
+
+Os resultados (snapshots, relatórios e resumo em JSON) são gravados em `outputs/pilar3/`.
+
 ### Como são definidas as regras para trazê-los?
 
 Selecionamos repositórios que entre **2018 e 2025** tiveram pelo menos um período de **≥ 6 meses sem commits** (morte).

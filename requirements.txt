@@ -1,0 +1,6 @@
+requests
+pandas
+tqdm
+pysonar
+openpyxl
+glob
