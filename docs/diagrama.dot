@@ -1,0 +1,40 @@
+digraph Process {
+  rankdir=TB;
+  node [shape=box, style=rounded, color="#0b59a0", fontname="Arial", fontsize=12, fillcolor="#f3f7ff", style=filled];
+
+  Start    [label="Identificação do dataset\n(GitHub GraphQL API, período entre 2018-2025)"];
+  Collect  [label="Coleta:\nRepositórios, stars, commits"];
+  Detect   [label="Detecção de gaps. Sem commits >= 180 dias"];
+  NoDeath  [label="Sem morte -> Repositório Ignorado"];
+  Death    [label="Extração do repositório e do período de morte\n(data_morte, data_revive)"];
+  Metrics  [label="Cálculo de métricas pré vs pós:\n- Commits\n- Devs\n- Issues/PRs\n- Intervalo médio"];
+  Check    [label="Verificação de critérios de ressurreição"];
+  ResYes   [label="Dataset Ressuscitados\n(JSON / XLSX)"];
+  ResNo    [label="Dataset Mortos\n(JSON / XLSX)"];
+
+  P1       [label="Pilar 1:\nPráticas de Engajamento\n(README, CONTRIBUTING, discussions...)"];
+  P2       [label="Pilar 2:\nAtividades do Repositório\n(PRs, commits, issues, boas práticas)"];
+  P3       [label="Pilar 3:\nQualidade do Código\n(Análise estática, Sonar, cobertura)"];
+
+  Agg      [label="Agregação de features:\nEngajamento + Atividades + Qualidade"];
+  Analyze  [label="Análise estatística e ML:\nCorrelação, regressão, clustering"];
+
+  Output   [label="Objetivo Final:\nCompreender práticas ligadas à\nressurreição e manutenção de OSS", shape=ellipse, color="#d35400", fillcolor="#fdebd0"];
+
+  Start -> Collect -> Detect;
+  Detect -> NoDeath [label="Não"];
+  Detect -> Death   [label="Sim"];
+  Death -> Metrics -> Check;
+  Check -> ResYes   [label="Sim"];
+  Check -> ResNo    [label="Não"];
+
+  ResYes -> P1;
+  ResYes -> P2;
+  ResYes -> P3;
+
+  P1 -> Agg;
+  P2 -> Agg;
+  P3 -> Agg;
+
+  Agg -> Analyze -> Output;
+}
