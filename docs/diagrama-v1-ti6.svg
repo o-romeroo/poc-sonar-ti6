@@ -1,0 +1,215 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="716pt" height="906pt" viewBox="0.00 0.00 716.00 906.00">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 902.01)">
+<title>Process</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-902.01 712.05,-902.01 712.05,4 -4,4"/>
+<!-- Start -->
+<g id="node1" class="node">
+<title>Start</title>
+<polygon fill="#f3f7ff" stroke="#0b59a0" points="356.42,-898.01 77.61,-898.01 77.61,-861.21 356.42,-861.21 356.42,-898.01"/>
+<text xml:space="preserve" text-anchor="middle" x="217.01" y="-883.21" font-family="Arial" font-size="12.00">Identificação do dataset</text>
+<text xml:space="preserve" text-anchor="middle" x="217.01" y="-868.81" font-family="Arial" font-size="12.00">(GitHub GraphQL API, período entre 2018-2025)</text>
+</g>
+<!-- Collect -->
+<g id="node2" class="node">
+<title>Collect</title>
+<polygon fill="#f3f7ff" stroke="#0b59a0" points="300.36,-824.21 133.67,-824.21 133.67,-787.41 300.36,-787.41 300.36,-824.21"/>
+<text xml:space="preserve" text-anchor="middle" x="217.01" y="-809.41" font-family="Arial" font-size="12.00">Coleta:</text>
+<text xml:space="preserve" text-anchor="middle" x="217.01" y="-795.01" font-family="Arial" font-size="12.00">Repositórios, stars, commits</text>
+</g>
+<!-- Start&#45;&gt;Collect -->
+<g id="edge1" class="edge">
+<title>Start-&gt;Collect</title>
+<path fill="none" stroke="black" d="M217.01,-860.86C217.01,-853.29 217.01,-844.27 217.01,-835.78"/>
+<polygon fill="black" stroke="black" points="220.51,-835.87 217.01,-825.87 213.51,-835.87 220.51,-835.87"/>
+</g>
+<!-- Detect -->
+<g id="node3" class="node">
+<title>Detect</title>
+<polygon fill="#f3f7ff" stroke="#0b59a0" points="346.41,-750.41 87.62,-750.41 87.62,-714.41 346.41,-714.41 346.41,-750.41"/>
+<text xml:space="preserve" text-anchor="middle" x="217.01" y="-728.81" font-family="Arial" font-size="12.00">Detecção de gaps. Sem commits &gt;= 180 dias</text>
+</g>
+<!-- Collect&#45;&gt;Detect -->
+<g id="edge2" class="edge">
+<title>Collect-&gt;Detect</title>
+<path fill="none" stroke="black" d="M217.01,-787.16C217.01,-779.64 217.01,-770.66 217.01,-762.22"/>
+<polygon fill="black" stroke="black" points="220.51,-762.37 217.01,-752.37 213.51,-762.37 220.51,-762.37"/>
+</g>
+<!-- NoDeath -->
+<g id="node4" class="node">
+<title>NoDeath</title>
+<polygon fill="#f3f7ff" stroke="#0b59a0" points="295.89,-661.21 92.14,-661.21 92.14,-625.21 295.89,-625.21 295.89,-661.21"/>
+<text xml:space="preserve" text-anchor="middle" x="194.01" y="-639.61" font-family="Arial" font-size="12.00">Sem morte -&gt; Repositório Ignorado</text>
+</g>
+<!-- Detect&#45;&gt;NoDeath -->
+<g id="edge3" class="edge">
+<title>Detect-&gt;NoDeath</title>
+<path fill="none" stroke="black" d="M212.47,-714.18C209.34,-702.31 205.11,-686.27 201.49,-672.55"/>
+<polygon fill="black" stroke="black" points="204.95,-671.94 199.01,-663.16 198.18,-673.72 204.95,-671.94"/>
+<text xml:space="preserve" text-anchor="middle" x="219.63" y="-683.81" font-family="Times,serif" font-size="14.00">Não</text>
+</g>
+<!-- Death -->
+<g id="node5" class="node">
+<title>Death</title>
+<polygon fill="#f3f7ff" stroke="#0b59a0" points="578.41,-661.61 313.61,-661.61 313.61,-624.81 578.41,-624.81 578.41,-661.61"/>
+<text xml:space="preserve" text-anchor="middle" x="446.01" y="-646.81" font-family="Arial" font-size="12.00">Extração do repositório e do período de morte</text>
+<text xml:space="preserve" text-anchor="middle" x="446.01" y="-632.41" font-family="Arial" font-size="12.00">(data_morte, data_revive)</text>
+</g>
+<!-- Detect&#45;&gt;Death -->
+<g id="edge4" class="edge">
+<title>Detect-&gt;Death</title>
+<path fill="none" stroke="black" d="M262.8,-713.97C298.95,-700.21 349.6,-680.92 388.49,-666.11"/>
+<polygon fill="black" stroke="black" points="389.61,-669.43 397.71,-662.6 387.12,-662.89 389.61,-669.43"/>
+<text xml:space="preserve" text-anchor="middle" x="363.31" y="-683.81" font-family="Times,serif" font-size="14.00">Sim</text>
+</g>
+<!-- Metrics -->
+<g id="node6" class="node">
+<title>Metrics</title>
+<polygon fill="#f3f7ff" stroke="#0b59a0" points="537.7,-587.81 354.32,-587.81 354.32,-507.81 537.7,-507.81 537.7,-587.81"/>
+<text xml:space="preserve" text-anchor="middle" x="446.01" y="-573.01" font-family="Arial" font-size="12.00">Cálculo de métricas pré vs pós:</text>
+<text xml:space="preserve" text-anchor="middle" x="446.01" y="-558.61" font-family="Arial" font-size="12.00">- Commits</text>
+<text xml:space="preserve" text-anchor="middle" x="446.01" y="-544.21" font-family="Arial" font-size="12.00">- Devs</text>
+<text xml:space="preserve" text-anchor="middle" x="446.01" y="-529.81" font-family="Arial" font-size="12.00">- Issues/PRs</text>
+<text xml:space="preserve" text-anchor="middle" x="446.01" y="-515.41" font-family="Arial" font-size="12.00">- Intervalo médio</text>
+</g>
+<!-- Death&#45;&gt;Metrics -->
+<g id="edge5" class="edge">
+<title>Death-&gt;Metrics</title>
+<path fill="none" stroke="black" d="M446.01,-624.64C446.01,-617.36 446.01,-608.5 446.01,-599.45"/>
+<polygon fill="black" stroke="black" points="449.51,-599.49 446.01,-589.49 442.51,-599.49 449.51,-599.49"/>
+</g>
+<!-- Check -->
+<g id="node7" class="node">
+<title>Check</title>
+<polygon fill="#f3f7ff" stroke="#0b59a0" points="558.38,-470.81 333.64,-470.81 333.64,-434.81 558.38,-434.81 558.38,-470.81"/>
+<text xml:space="preserve" text-anchor="middle" x="446.01" y="-449.21" font-family="Arial" font-size="12.00">Verificação de critérios de ressurreição</text>
+</g>
+<!-- Metrics&#45;&gt;Check -->
+<g id="edge6" class="edge">
+<title>Metrics-&gt;Check</title>
+<path fill="none" stroke="black" d="M446.01,-507.37C446.01,-499.05 446.01,-490.42 446.01,-482.59"/>
+<polygon fill="black" stroke="black" points="449.51,-482.6 446.01,-472.6 442.51,-482.6 449.51,-482.6"/>
+</g>
+<!-- ResYes -->
+<g id="node8" class="node">
+<title>ResYes</title>
+<polygon fill="#f3f7ff" stroke="#0b59a0" points="447.38,-382.01 308.65,-382.01 308.65,-345.21 447.38,-345.21 447.38,-382.01"/>
+<text xml:space="preserve" text-anchor="middle" x="378.01" y="-367.21" font-family="Arial" font-size="12.00">Dataset Ressuscitados</text>
+<text xml:space="preserve" text-anchor="middle" x="378.01" y="-352.81" font-family="Arial" font-size="12.00">(JSON / XLSX)</text>
+</g>
+<!-- Check&#45;&gt;ResYes -->
+<g id="edge7" class="edge">
+<title>Check-&gt;ResYes</title>
+<path fill="none" stroke="black" d="M432.58,-434.58C422.93,-422.2 409.73,-405.28 398.74,-391.18"/>
+<polygon fill="black" stroke="black" points="401.73,-389.33 392.82,-383.59 396.21,-393.63 401.73,-389.33"/>
+<text xml:space="preserve" text-anchor="middle" x="429.39" y="-404.21" font-family="Times,serif" font-size="14.00">Sim</text>
+</g>
+<!-- ResNo -->
+<g id="node9" class="node">
+<title>ResNo</title>
+<polygon fill="#f3f7ff" stroke="#0b59a0" points="562.7,-382.01 465.33,-382.01 465.33,-345.21 562.7,-345.21 562.7,-382.01"/>
+<text xml:space="preserve" text-anchor="middle" x="514.01" y="-367.21" font-family="Arial" font-size="12.00">Dataset Mortos</text>
+<text xml:space="preserve" text-anchor="middle" x="514.01" y="-352.81" font-family="Arial" font-size="12.00">(JSON / XLSX)</text>
+</g>
+<!-- Check&#45;&gt;ResNo -->
+<g id="edge8" class="edge">
+<title>Check-&gt;ResNo</title>
+<path fill="none" stroke="black" d="M459.45,-434.58C469.1,-422.2 482.29,-405.28 493.29,-391.18"/>
+<polygon fill="black" stroke="black" points="495.82,-393.63 499.21,-383.59 490.3,-389.33 495.82,-393.63"/>
+<text xml:space="preserve" text-anchor="middle" x="498.16" y="-404.21" font-family="Times,serif" font-size="14.00">Não</text>
+</g>
+<!-- P1 -->
+<g id="node10" class="node">
+<title>P1</title>
+<polygon fill="#f3f7ff" stroke="#0b59a0" points="252.03,-308.21 0,-308.21 0,-257.01 252.03,-257.01 252.03,-308.21"/>
+<text xml:space="preserve" text-anchor="middle" x="126.01" y="-293.41" font-family="Arial" font-size="12.00">Pilar 1:</text>
+<text xml:space="preserve" text-anchor="middle" x="126.01" y="-279.01" font-family="Arial" font-size="12.00">Práticas de Engajamento</text>
+<text xml:space="preserve" text-anchor="middle" x="126.01" y="-264.61" font-family="Arial" font-size="12.00">(README, CONTRIBUTING, discussions...)</text>
+</g>
+<!-- ResYes&#45;&gt;P1 -->
+<g id="edge9" class="edge">
+<title>ResYes-&gt;P1</title>
+<path fill="none" stroke="black" d="M321.15,-344.78C290.23,-335.09 251.27,-322.88 216.31,-311.92"/>
+<polygon fill="black" stroke="black" points="217.64,-308.66 207.05,-309.01 215.54,-315.34 217.64,-308.66"/>
+</g>
+<!-- P2 -->
+<g id="node11" class="node">
+<title>P2</title>
+<polygon fill="#f3f7ff" stroke="#0b59a0" points="486.37,-308.21 269.66,-308.21 269.66,-257.01 486.37,-257.01 486.37,-308.21"/>
+<text xml:space="preserve" text-anchor="middle" x="378.01" y="-293.41" font-family="Arial" font-size="12.00">Pilar 2:</text>
+<text xml:space="preserve" text-anchor="middle" x="378.01" y="-279.01" font-family="Arial" font-size="12.00">Atividades do Repositório</text>
+<text xml:space="preserve" text-anchor="middle" x="378.01" y="-264.61" font-family="Arial" font-size="12.00">(PRs, commits, issues, boas práticas)</text>
+</g>
+<!-- ResYes&#45;&gt;P2 -->
+<g id="edge10" class="edge">
+<title>ResYes-&gt;P2</title>
+<path fill="none" stroke="black" d="M378.01,-345.08C378.01,-337.62 378.01,-328.62 378.01,-319.85"/>
+<polygon fill="black" stroke="black" points="381.51,-320.1 378.01,-310.1 374.51,-320.1 381.51,-320.1"/>
+</g>
+<!-- P3 -->
+<g id="node12" class="node">
+<title>P3</title>
+<polygon fill="#f3f7ff" stroke="#0b59a0" points="708.05,-308.21 503.97,-308.21 503.97,-257.01 708.05,-257.01 708.05,-308.21"/>
+<text xml:space="preserve" text-anchor="middle" x="606.01" y="-293.41" font-family="Arial" font-size="12.00">Pilar 3:</text>
+<text xml:space="preserve" text-anchor="middle" x="606.01" y="-279.01" font-family="Arial" font-size="12.00">Qualidade do Código</text>
+<text xml:space="preserve" text-anchor="middle" x="606.01" y="-264.61" font-family="Arial" font-size="12.00">(Análise estática, Sonar, cobertura)</text>
+</g>
+<!-- ResYes&#45;&gt;P3 -->
+<g id="edge11" class="edge">
+<title>ResYes-&gt;P3</title>
+<path fill="none" stroke="black" d="M429.47,-344.78C457.2,-335.17 492.08,-323.09 523.5,-312.2"/>
+<polygon fill="black" stroke="black" points="524.27,-315.63 532.57,-309.05 521.98,-309.02 524.27,-315.63"/>
+</g>
+<!-- Agg -->
+<g id="node13" class="node">
+<title>Agg</title>
+<polygon fill="#f3f7ff" stroke="#0b59a0" points="490.08,-220.01 265.94,-220.01 265.94,-183.21 490.08,-183.21 490.08,-220.01"/>
+<text xml:space="preserve" text-anchor="middle" x="378.01" y="-205.21" font-family="Arial" font-size="12.00">Agregação de features:</text>
+<text xml:space="preserve" text-anchor="middle" x="378.01" y="-190.81" font-family="Arial" font-size="12.00">Engajamento + Atividades + Qualidade</text>
+</g>
+<!-- P1&#45;&gt;Agg -->
+<g id="edge12" class="edge">
+<title>P1-&gt;Agg</title>
+<path fill="none" stroke="black" d="M205.75,-256.61C239.43,-246.05 278.24,-233.89 310.48,-223.78"/>
+<polygon fill="black" stroke="black" points="311.21,-227.22 319.7,-220.89 309.11,-220.54 311.21,-227.22"/>
+</g>
+<!-- P2&#45;&gt;Agg -->
+<g id="edge13" class="edge">
+<title>P2-&gt;Agg</title>
+<path fill="none" stroke="black" d="M378.01,-256.61C378.01,-248.72 378.01,-239.92 378.01,-231.76"/>
+<polygon fill="black" stroke="black" points="381.51,-231.95 378.01,-221.95 374.51,-231.95 381.51,-231.95"/>
+</g>
+<!-- P3&#45;&gt;Agg -->
+<g id="edge14" class="edge">
+<title>P3-&gt;Agg</title>
+<path fill="none" stroke="black" d="M533.87,-256.61C503.8,-246.19 469.2,-234.2 440.26,-224.18"/>
+<polygon fill="black" stroke="black" points="441.49,-220.9 430.9,-220.93 439.2,-227.51 441.49,-220.9"/>
+</g>
+<!-- Analyze -->
+<g id="node14" class="node">
+<title>Analyze</title>
+<polygon fill="#f3f7ff" stroke="#0b59a0" points="474.72,-146.21 281.31,-146.21 281.31,-109.41 474.72,-109.41 474.72,-146.21"/>
+<text xml:space="preserve" text-anchor="middle" x="378.01" y="-131.41" font-family="Arial" font-size="12.00">Análise estatística e ML:</text>
+<text xml:space="preserve" text-anchor="middle" x="378.01" y="-117.01" font-family="Arial" font-size="12.00">Correlação, regressão, clustering</text>
+</g>
+<!-- Agg&#45;&gt;Analyze -->
+<g id="edge15" class="edge">
+<title>Agg-&gt;Analyze</title>
+<path fill="none" stroke="black" d="M378.01,-182.86C378.01,-175.29 378.01,-166.27 378.01,-157.78"/>
+<polygon fill="black" stroke="black" points="381.51,-157.87 378.01,-147.87 374.51,-157.87 381.51,-157.87"/>
+</g>
+<!-- Output -->
+<g id="node15" class="node">
+<title>Output</title>
+<ellipse fill="#fdebd0" stroke="#d35400" cx="378.01" cy="-36.2" rx="147.14" ry="36.2"/>
+<text xml:space="preserve" text-anchor="middle" x="378.01" y="-47" font-family="Arial" font-size="12.00">Objetivo Final:</text>
+<text xml:space="preserve" text-anchor="middle" x="378.01" y="-32.6" font-family="Arial" font-size="12.00">Compreender práticas ligadas à</text>
+<text xml:space="preserve" text-anchor="middle" x="378.01" y="-18.2" font-family="Arial" font-size="12.00">ressurreição e manutenção de OSS</text>
+</g>
+<!-- Analyze&#45;&gt;Output -->
+<g id="edge16" class="edge">
+<title>Analyze-&gt;Output</title>
+<path fill="none" stroke="black" d="M378.01,-109.1C378.01,-101.79 378.01,-92.93 378.01,-83.96"/>
+<polygon fill="black" stroke="black" points="381.51,-84.18 378.01,-74.18 374.51,-84.18 381.51,-84.18"/>
+</g>
+</g>
+</svg>

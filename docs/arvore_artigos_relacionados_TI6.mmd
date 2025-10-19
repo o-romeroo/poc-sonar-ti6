@@ -1,0 +1,81 @@
+graph LR
+    A[Artigo Atual: Mapeando a Revivência de Repositórios OSS] --> B1[Área 1: Abandono e Sobrevivência]
+    A --> B2[Área 2: Engajamento Comunitário]
+    A --> B3[Área 3: Qualidade do Código]
+    A --> B4[Área 4: Abordagens Complementares]
+    
+    %% Área 1 - Abandono e Sobrevivência
+    B1 --> C1[Avelino et al. 2019]
+    C1 --> C1S[Semelhança: Análise empírica do ciclo de vida]
+    C1 --> C1D[Diferença: Foco geral vs. revivência específica]
+    
+    B1 --> C2[Coelho et al. 2020]
+    C2 --> C2S[Semelhança: Métricas + Machine Learning]
+    C2 --> C2D[Diferença: Manutenção geral vs. pós-ressurreição]
+    
+    B1 --> C3[Khondhu et al. 2014]
+    C3 --> C3S[Semelhança: Critérios temporais de inatividade]
+    C3 --> C3D[Diferença: SourceForge vs. GitHub + foco estático]
+    
+    %% Área 2 - Engajamento
+    B2 --> C5[Calefato et al. 2022]
+    C5 --> C5S[Semelhança: Estados de inatividade/retorno]
+    C5 --> C5D[Diferença: Desenvolvedores vs. repositórios]
+    
+    B2 --> C6[Kaur et al. 2022]
+    C6 --> C6S[Semelhança: Fundamentação teórica de engajamento]
+    C6 --> C6D[Diferença: Revisão sistemática vs. estudo empírico]
+    
+    B2 --> C7[Stanik et al. 2018]
+    C7 --> C7S[Semelhança: Onboarding e retenção]
+    C7 --> C7D[Diferença: NLP vs. análise métrica multidimensional]
+    
+    %% Área 3 - Qualidade Técnica
+    B3 --> C8[Ma et al. 2019]
+    C8 --> C8S[Semelhança: Impacto da qualidade em PRs]
+    C8 --> C8D[Diferença: Aceitação de PRs vs. revitalização completa]
+    
+    B3 --> C9[Dey 2020]
+    C9 --> C9S[Semelhança: Fatores técnicos-sociais em PRs]
+    C9 --> C9D[Diferença: Qualidade individual vs. processo coletivo]
+    
+    B3 --> C10[Wang et al. 2022]
+    C10 --> C10S[Semelhança: Eficiência em gestão de issues/PRs]
+    C10 --> C10D[Diferença: PRs similares vs. contexto de revivência]
+    
+    B3 --> C11[Alami et al. 2024]
+    C11 --> C11S[Semelhança: Relação comunidade-qualidade]
+    C11 --> C11D[Diferença: Sustentabilidade vs. ressurgimento]
+    
+    B3 --> C16[Kapllani et al. 2020]
+    C16 --> C16S[Semelhança: MI, LOC, CC para diagnóstico técnico]
+    C16 --> C16D[Diferença: Evolução contínua vs. morte/ressurreição]
+    
+    %% Área 4 - Abordagens Complementares
+    B4 --> C12[Jiang 2017]
+    C12 --> C12S[Semelhança: Foco em inatividade]
+    C12 --> C12D[Diferença: Assignees vs. repositórios inteiros]
+    
+    B4 --> C13[Bollier & Helfrich 2015]
+    C13 --> C13S[Semelhança: Práticas colaborativas]
+    C13 --> C13D[Diferença: Abordagem conceitual vs. empírica]
+    
+    B4 --> C14[Brandes et al. 2022]
+    C14 --> C14S[Semelhança: Análise de sustentabilidade]
+    C14 --> C14D[Diferença: Institucional vs. técnico-comportamental]
+    
+    B4 --> C15[Souza & Oliveira 2025]
+    C15 --> C15S[Semelhança: Classificação de repositórios]
+    C15 --> C15D[Diferença: Iniciantes vs. projetos estabelecidos]
+    
+    classDef area fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    classDef article fill:#f5f5f5,stroke:#424242,stroke-width:1px
+    classDef current fill:#fff8e1,stroke:#ff8f00,stroke-width:3px
+    classDef similarity fill:#bbf7d0,stroke:#166534,stroke-width:1px
+    classDef difference fill:#fecaca,stroke:#dc2626,stroke-width:1px
+    
+    class B1,B2,B3,B4 area
+    class C1,C2,C3,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,C15,C16 article
+    class A current
+    class C1S,C2S,C3S,C5S,C6S,C7S,C8S,C9S,C10S,C11S,C12S,C13S,C14S,C15S,C16S similarity
+    class C1D,C2D,C3D,C5D,C6D,C7D,C8D,C9D,C10D,C11D,C12D,C13D,C14D,C15D,C16D difference

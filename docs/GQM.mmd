@@ -1,0 +1,31 @@
+graph TD
+    G["Goal: Compreender fatores tecnicos e sociais que contribuem para a revivencia e manutencao de repositorios OSS (2018–2025)"] --> Q1
+    G --> Q2
+    G --> Q3
+
+    %% Pilar 1 - Engajamento
+    Q1["Question 1 – Engajamento: Quais praticas de engajamento comunitario estao associadas a revivencia de repositorios OSS?"]
+    Q1 --> M11["M1.1 – Frequencia e atualizacao de arquivos de engajamento (README, CONTRIBUTING, CODE_OF_CONDUCT)"]
+    Q1 --> M12["M1.2 – Interacoes comunitarias (discussions, stars, forks, comentarios)"]
+    Q1 --> M13["M1.3 – Diversidade e recorrencia de contribuidores (novos e retornantes apos revivencia)"]
+
+    %% Pilar 2 - Atividades
+    Q2["Question 2 – Atividades: Quais caracteristicas das atividades de desenvolvimento distinguem repositorios que se revivem dos que permanecem inativos?"]
+    Q2 --> M21["M2.1 – Qualidade dos Pull Requests (tamanho, tempo de revisao, aceitacao, descricao)"]
+    Q2 --> M22["M2.2 – Clareza e completude das Issues (labels, descricao, tempo de fechamento)"]
+    Q2 --> M23["M2.3 – Aderencia a convencoes de commits (uso de conventional commits, mensagens estruturadas)"]
+
+    %% Pilar 3 - Qualidade do Codigo
+    Q3["Question 3 – Qualidade do Codigo: Como a qualidade tecnica e manutencao do codigo influenciam a sustentabilidade e revivencia dos repositorios OSS?"]
+    Q3 --> M31["M3.1 – Metricas de analise estatica de codigo (complexidade, duplicacao, code smells)"]
+    Q3 --> M32["M3.2 – Cobertura de testes (percentual e evolucao antes/depois da revivencia)"]
+    Q3 --> M33["M3.3 – Indice de maintainability / qualidade Sonar (pontuacao agregada de qualidade e seguranca)"]
+
+    %% Estilos
+    classDef goal fill:#fff8e1,stroke:#ff8f00,stroke-width:2px;
+    classDef question fill:#e3f2fd,stroke:#1976d2,stroke-width:2px;
+    classDef metric fill:#f5f5f5,stroke:#424242,stroke-width:1px;
+
+    class G goal;
+    class Q1,Q2,Q3 question;
+    class M11,M12,M13,M21,M22,M23,M31,M32,M33 metric;
