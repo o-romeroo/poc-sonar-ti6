@@ -149,27 +149,31 @@ def pick_post_revive_commit(
     revive_date: dt.datetime,
     headers: Dict[str, str],
 ) -> Optional[SnapshotCommit]:
-    search_windows = [30, 90, 180, 365]
+    search_windows = [30, 90, 180, 365, 730]
+    collected: Dict[str, SnapshotCommit] = {}
     for window in search_windows:
         since = revive_date
         until = revive_date + dt.timedelta(days=window)
         commits = fetch_commits(owner, name, since, until, headers)
         if not commits:
             continue
-        parsed: List[SnapshotCommit] = []
         for node in commits:
-            committed_at = utc_from_str(node["committedDate"])
+            commit_date_raw = node.get("committedDate")
+            if not commit_date_raw:
+                continue
+            committed_at = utc_from_str(commit_date_raw)
             if committed_at >= revive_date:
-                parsed.append(
-                    SnapshotCommit(
-                        sha=node["oid"],
-                        committed_at=committed_at,
-                        message=node.get("messageHeadline", ""),
-                    )
+                sha = node.get("oid")
+                if not sha:
+                    continue
+                collected[sha] = SnapshotCommit(
+                    sha=sha,
+                    committed_at=committed_at,
+                    message=node.get("messageHeadline", ""),
                 )
-        if parsed:
-            parsed.sort(key=lambda c: c.committed_at)
-            return parsed[0]
+        ordered = sorted(collected.values(), key=lambda c: c.committed_at)
+        if len(ordered) >= 10:
+            return ordered[9]
     return None
 
 
@@ -269,7 +273,7 @@ def prepare_snapshots(
         raise PipelineError("Não foi possível localizar commit pré-morte")
     post_commit = pick_post_revive_commit(owner, name, dates["revive"], headers)
     if not post_commit:
-        raise PipelineError("Não foi possível localizar commit pós-revive")
+        raise PipelineError("Repositorio sem ao menos dez commits apos a ressurreição")
 
     base_dir = snapshots_root / f"{owner}__{name}"
     pre_dir = base_dir / "pre_morte"
@@ -320,7 +324,6 @@ def main() -> None:
     parser.add_argument("--output-root", type=str, default="outputs/pilar3", help="Diretorio base para snapshots e relatorios")
     parser.add_argument("--github-token", type=str, default=os.getenv("GITHUB_TOKEN"), help="Token do GitHub para GraphQL")
     parser.add_argument("--sonar-token", type=str, default=os.getenv("SONAR_TOKEN"), help="Token para autenticacao Sonar")
-    # MODIFICAÇÃO: Removido o argumento --sonar-project-key, pois será dinâmico.
     parser.add_argument("--sonar-organization", type=str, default=os.getenv("SONAR_ORGANIZATION", "ti6"))
     parser.add_argument("--limit", type=int, default=None, help="Limite opcional de repositorios a processar")
     args = parser.parse_args()
@@ -348,43 +351,43 @@ def main() -> None:
         print(f"[error] {exc}")
         sys.exit(1)
 
-    # snapshot_records: List[Dict[str, object]] = []
-    # records: List[Dict[str, object]] = df.to_dict(orient="records")
-    # if args.limit:
-    #     records = records[: args.limit]
-    # for row_dict in tqdm(records, desc="Preparando snapshots", unit="repo"):
-    #     row_series = pd.Series(row_dict)
-    #     try:
-    #         row_snapshots = prepare_snapshots(
-    #             row_series,
-    #             headers,
-    #             snapshots_root,
-    #         )
-    #         snapshot_records.extend(row_snapshots)
-    #     except (PipelineError, subprocess.CalledProcessError) as exc:
-    #         repo_name = row_series.get("Nome") or row_series.get("nameWithOwner") or "desconhecido"
-    #         print(f"[warn] Falha ao processar {repo_name}: {exc}")
+    snapshot_records: List[Dict[str, object]] = []
+    records: List[Dict[str, object]] = df.to_dict(orient="records")
+    if args.limit:
+        records = records[: args.limit]
+    for row_dict in tqdm(records, desc="Preparando snapshots", unit="repo"):
+        row_series = pd.Series(row_dict)
+        try:
+            row_snapshots = prepare_snapshots(
+                row_series,
+                headers,
+                snapshots_root,
+            )
+            snapshot_records.extend(row_snapshots)
+        except (PipelineError, subprocess.CalledProcessError) as exc:
+            repo_name = row_series.get("Nome") or row_series.get("nameWithOwner") or "desconhecido"
+            print(f"[warn] Falha ao processar {repo_name}: {exc}")
 
-    # if not snapshot_records:
-    #     print("[warn] Nenhum snapshot preparado.")
-    #     return
+    if not snapshot_records:
+        print("[warn] Nenhum snapshot preparado.")
+        return
 
     # Referenciar todos os snapshots já existentes para análise Sonar
-    snapshot_records = []
-    for repo_dir in snapshots_root.glob("*"):
-        if not repo_dir.is_dir():
-            continue
-        for snap_type in ["pre_morte", "pos_revive"]:
-            snap_path = repo_dir / snap_type
-            if snap_path.is_dir():
-                snapshot_records.append({
-                    "repo": repo_dir.name.replace("__", "/"),
-                    "snapshot": snap_type,
-                    "commit": None,
-                    "committed_at": None,
-                    "path": str(snap_path),
-                    "branch_label": f"{repo_dir.name.replace('__', '-')}-{snap_type}",
-                })
+    # snapshot_records = []
+    # for repo_dir in snapshots_root.glob("*"):
+    #     if not repo_dir.is_dir():
+    #         continue
+    #     for snap_type in ["pre_morte", "pos_revive"]:
+    #         snap_path = repo_dir / snap_type
+    #         if snap_path.is_dir():
+    #             snapshot_records.append({
+    #                 "repo": repo_dir.name.replace("__", "/"),
+    #                 "snapshot": snap_type,
+    #                 "commit": None,
+    #                 "committed_at": None,
+    #                 "path": str(snap_path),
+    #                 "branch_label": f"{repo_dir.name.replace('__', '-')}-{snap_type}",
+    #             })
 
     results: List[Dict[str, object]] = []
     for snapshot in tqdm(snapshot_records, desc="Analisando snapshots", unit="snapshot"):
